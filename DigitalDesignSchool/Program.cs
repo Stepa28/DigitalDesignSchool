@@ -5,11 +5,11 @@ var filePath = Console.ReadLine(); //Получение пути до текст
 
 try
 {
-    var allText = File.ReadAllText(filePath);                         //Чтение текстового файла
-    var enumerableWords = Regex.Matches(allText, @"\b\w+\b")          //Получение списка слов
-                               .GroupBy(x => x.Value)                 //Группировка по отдельным словам
-                               .OrderByDescending(x => x.Count())     //Сортировка по убыванию
-                               .Select(x => $"{x.Key}\t{x.Count()}"); //Форма записи
+    var allText = File.ReadAllText(filePath);                          //Чтение текстового файла
+    var enumerableWords = Regex.Matches(allText, @"\b\w+[\'\-\w*]*\b") //Получение списка слов
+                               .GroupBy(x => x.Value.ToLower())        //Группировка по отдельным словам + игнорирование регистра
+                               .OrderByDescending(x => x.Count())      //Сортировка по убыванию
+                               .Select(x => $"{x.Key}\t{x.Count()}");  //Форма записи
 
     File.WriteAllText(@"WordsInText.txt",      //Запись получившегося результата
         string.Join("\r\n", enumerableWords)); //Склейка полученных результатов, каждый с новой строки
