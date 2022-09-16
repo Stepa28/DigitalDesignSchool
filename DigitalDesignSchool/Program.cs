@@ -1,14 +1,13 @@
 ﻿using System.Text.RegularExpressions;
 
 Console.WriteLine("Введите путь до текстового файла");
-var filePath = Console.ReadLine(); //Получение путя до текстового файла
+var filePath = Console.ReadLine(); //Получение пути до текстового файла
 
 try
 {
     var allText = File.ReadAllText(filePath);                         //Чтение текстового файла
     var enumerableWords = Regex.Matches(allText, @"\b\w+\b")          //Получение списка слов
-                               .Select(x => x.Value)                  //Выбор строк
-                               .GroupBy(x => x)                       //Группировка по отдельным словам
+                               .GroupBy(x => x.Value)                 //Группировка по отдельным словам
                                .OrderByDescending(x => x.Count())     //Сортировка по убыванию
                                .Select(x => $"{x.Key}\t{x.Count()}"); //Форма записи
 
