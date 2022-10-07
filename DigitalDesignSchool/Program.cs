@@ -1,21 +1,26 @@
-﻿using System.Text.RegularExpressions;
-
-Console.WriteLine("Введите путь до текстового файла");
-var filePath = Console.ReadLine(); //Получение пути до текстового файла
-
-try
+﻿try
 {
-    var allText = File.ReadAllText(filePath);                          //Чтение текстового файла
-    var enumerableWords = Regex.Matches(allText, @"\b\w+[\'\-\w*]*\b") //Получение списка слов
-                               .GroupBy(x => x.Value.ToLower())        //Группировка по отдельным словам + игнорирование регистра
-                               .OrderByDescending(x => x.Count())      //Сортировка по убыванию
-                               .Select(x => $"{x.Key}\t{x.Count()}");  //Форма записи
+    var words = new Dictionary<string, int>();
+    var allText = File.ReadAllText("C:\\Project\\DigitalDesignSchool\\Text.txt"); //Чтение текстового файла
 
-    File.WriteAllText(@"WordsInText.txt",      //Запись получившегося результата
-        string.Join("\r\n", enumerableWords)); //Склейка полученных результатов, каждый с новой строки
+    char[] chars = { ' ', '.', ',', ';', ':', '?', '\n', '\r', '"', '(', ')', '[', ']', '!' }; // разделители слов
+    string[] enumerableWords = allText.Split(chars, StringSplitOptions.RemoveEmptyEntries);    //Получение массива списка слов
 
+    foreach (string word in enumerableWords)
+    {
+        string w = word.ToLower(); //все слова в нижнем регистре
 
-    Console.WriteLine("Приложение закончило свою работу успешно");
+        if (!words.ContainsKey(w))
+            words.Add(w, 1); //если слова нет в словаре, то добавляем
+        else
+            words[w] += 1; //если слово есть в словаре, добавляем счётчику 1
+    }
+
+    File.WriteAllText(@"WordsInText.txt", //Запись получившегося результата
+        string.Join("\r\n",
+            words.OrderByDescending(x => x.Value)
+                 .Select(word => $"{word.Key}\t{word.Value}"))); //Склейка полученных результатов, каждый с новой строки
+
 }
 catch (Exception e) //Т.к. задача учебная обработчик всех возможных ошибок не делал
 {
