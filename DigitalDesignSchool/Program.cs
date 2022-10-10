@@ -1,29 +1,15 @@
-﻿try
-{
-    var words = new Dictionary<string, int>();
-    var allText = File.ReadAllText("C:\\Project\\DigitalDesignSchool\\Text.txt"); //Чтение текстового файла
+﻿using System.Reflection;
+using PrivateLibrary;
 
-    char[] chars = { ' ', '.', ',', ';', ':', '?', '\n', '\r', '"', '(', ')', '[', ']', '!' }; // разделители слов
-    string[] enumerableWords = allText.Split(chars, StringSplitOptions.RemoveEmptyEntries);    //Получение массива списка слов
+string filePath = "C:\\Project\\DigitalDesignSchool\\Text.txt";
 
-    foreach (string word in enumerableWords)
-    {
-        string w = word.ToLower(); //все слова в нижнем регистре
+var couter = new WordsCounter();
+var method = couter.GetType().GetMethod("WordsCounterFromPathFile", BindingFlags.NonPublic | BindingFlags.Instance);
 
-        if (!words.ContainsKey(w))
-            words.Add(w, 1); //если слова нет в словаре, то добавляем
-        else
-            words[w] += 1; //если слово есть в словаре, добавляем счётчику 1
-    }
+object[] parameters = { filePath };
+var words = method.Invoke(couter, parameters) as Dictionary<string, int>;
 
-    File.WriteAllText(@"WordsInText.txt", //Запись получившегося результата
-        string.Join("\r\n",
-            words.OrderByDescending(x => x.Value)
-                 .Select(word => $"{word.Key}\t{word.Value}"))); //Склейка полученных результатов, каждый с новой строки
-
-}
-catch (Exception e) //Т.к. задача учебная обработчик всех возможных ошибок не делал
-{
-    Console.WriteLine($"Во время работы приложения возникло исключение :\n{e}");
-    throw;
-}
+File.WriteAllText(@"WordsInText.txt", //Запись получившегося результата
+    string.Join("\r\n",
+        words.OrderByDescending(x => x.Value)
+             .Select(word => $"{word.Key}\t{word.Value}"))); //Склейка полученных результатов, каждый с новой строки

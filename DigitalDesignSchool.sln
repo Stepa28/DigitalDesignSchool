@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalDesignSchool", "DigitalDesignSchool\DigitalDesignSchool.csproj", "{76C9E9AC-BFDE-457C-B096-5955E0099E85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateLibrary", "PrivateLibrary\PrivateLibrary.csproj", "{1EF8E34C-B2B0-4206-87BA-56333289ECC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{76C9E9AC-BFDE-457C-B096-5955E0099E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76C9E9AC-BFDE-457C-B096-5955E0099E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76C9E9AC-BFDE-457C-B096-5955E0099E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EF8E34C-B2B0-4206-87BA-56333289ECC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EF8E34C-B2B0-4206-87BA-56333289ECC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EF8E34C-B2B0-4206-87BA-56333289ECC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EF8E34C-B2B0-4206-87BA-56333289ECC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
