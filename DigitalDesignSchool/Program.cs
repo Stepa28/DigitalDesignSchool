@@ -7,7 +7,7 @@ Stopwatch stopWatch = new Stopwatch();
 stopWatch.Start();
 
 var allText = File.ReadAllText(filePath); //Чтение текстового файла
-var client = new RestClient("https://localhost:44305/WordsCouturier");
+var client = new RestClient("https://localhost:44384/WordsCouturier");
 var request = new RestRequest("", Method.Post);
 
 char[] chars = { ' ', '.', ',', ';', ':', '?', '\n', '\r', '"', '(', ')', '[', ']', '!' }; // разделители слов
